@@ -14,8 +14,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { LoginComponent } from './auth/login/login.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderListComponent } from './order-list/order-list.component';
 import { OrdersService } from "./shared/orders.service";
 import { FormsComponent } from './forms/forms.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -29,9 +27,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     NavComponent,
     RegistrationComponent,
     LoginComponent,
-    OrdersComponent,
-    OrderListComponent,
-    FormsComponent,
+    FormsComponent
   ],
   imports: [
     BrowserModule,
