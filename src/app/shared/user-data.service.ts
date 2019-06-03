@@ -10,15 +10,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class UserDataService {
   userData : Observable<any>;
-  form = new FormGroup({
-  });
+
   registration = []
   constructor(private firestore: AngularFirestore) { }
 
-  updateCoffeeOrder(data) {
-    return this.firestore
-      .collection("coffeeOrders")
-      .doc(data.payload.doc.id)
-      .set({ completed: true }, { merge: true });
-  }
 }

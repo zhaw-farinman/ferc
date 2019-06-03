@@ -32,6 +32,8 @@
                   </div>
                 </div>
                 <div class="row">
+                    <input ngModel #uid="ngModel" name="uid" type="text" hidden class="form-control"
+                    [(ngModel)]="user.uid" id="uid">
                   <div class="col s6">
                     <label for="firstName">First name</label>
                     <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control"

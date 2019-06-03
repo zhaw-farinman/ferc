@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateUserData(frm) {
-    this.firestore.collection("Users").doc("uZ4mNrKQ3dWyYlUfP554STn1n9h1").update(frm.value).then(res => {}, err => reject(err));
+    this.firestore.collection("Users").doc(frm.value.uid).update(frm.value).then(res => {}, err => reject(err));
     //add(frm.value).then(res => {}, err => reject(err));
   }
   //getUserData = () =>
