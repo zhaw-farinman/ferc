@@ -32,37 +32,33 @@ export class HomeComponent implements OnInit {
 
         this.getUserData(this.user.uid);
       })
-    //this.auth.getUserData(this.user.uid).subscribe(data => console.log(data));
-    //console.log(this.userData);
-
-
-
   }
-
+  //führt zu der Login-Seite
   login() {
     this.router.navigate(['/login']);
   }
-
+  //Loggt den Benutzer aus
   logout() {
     this.auth.logout();
   }
-
+ //führt zu der Anmelde-Seite
   register() {
     this.router.navigate(['/register']);
   }
-
+  //erhält die Benutzerdaten
   getUserData(userUid: string) {
     this.auth.getUserData(this.user.uid).subscribe(data => {
       this.userData = data;
     });
   }
-
+  //aktualisiert die Kundendaten
   updateUserData(frm) {
     this.firestore.collection("Users").doc(frm.value.uid).update(frm.value).then(res => {}, err => reject(err));
     this.startProcess(frm.value.uid);
     //add(frm.value).then(res => {}, err => reject(err));
   }
 
+  //sendet einen REST-Request an das Workflowmanagement Camunda und startet einen neuen Prozess
   startProcess(userUid) {
     this.postData = {
       "variables": {
