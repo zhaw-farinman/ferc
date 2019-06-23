@@ -4,8 +4,9 @@
     <nav>
       <ul>
         <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Anmelden</a></li>
+        <li><a routerLink="/login" *ngIf="!user">Login</a></li>
+        <li><a routerLink="/register" *ngIf="!user">Anmelden</a></li>
+        <li><a href="" *ngIf="user" (click)="logout()">Abmelden</a></li>
       </ul>
     </nav>
   </div>

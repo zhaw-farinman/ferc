@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-//@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "style/custom.bootstrap.min.css";
 
 body, html {
     height: 100%;
@@ -33,3 +33,26 @@ section {
     margin: 0 auto;
     padding: 2em;
 }
+.card {
+    border: none;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    border: 1px solid rgba(0,0,0,.125);
+    border-top: none;
+}
+
+.card-body .row {
+
+    margin-bottom: 15px;
+
+}
+
+
+/*Specific Cases*/
+
+.btn {
+    margin-top: 10px;
+    border-radius: 0;
+  }

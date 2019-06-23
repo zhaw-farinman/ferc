@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, userData } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { UserDataService } from "../shared/user-data.service";
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { reject } from 'q';
+import { HttpClient} from '@angular/common/http';
 
 
 
@@ -15,13 +15,14 @@ import { reject } from 'q';
 
 })
 export class HomeComponent implements OnInit {
-
+  postData: {};
   user: firebase.User;
   userData: any;
+  readonly ROOT_URL = 'http://localhost:8080/rest/process-definition/key/redcross/start';
   constructor(private auth: AuthService,
     private router: Router,
-    private userDataService: UserDataService,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore,
+    private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -58,10 +59,30 @@ export class HomeComponent implements OnInit {
 
   updateUserData(frm) {
     this.firestore.collection("Users").doc(frm.value.uid).update(frm.value).then(res => {}, err => reject(err));
+    this.startProcess(frm.value.uid);
     //add(frm.value).then(res => {}, err => reject(err));
   }
-  //getUserData = () =>
-  //this.userDataService.getUserData(this.user.uid).subscribe(res => (this.userData = res));
+
+  startProcess(userUid) {
+    this.postData = {
+      "variables": {
+        "userId": {
+          "value": userUid,
+          "type": "String"
+        }
+      },
+      "startInstructions": [
+        {
+          "type": "startBeforeActivity",
+          "activityId": "StartEvent"
+        }
+      ],
+      "businessKey": ""
+    }
+    this.http.post(this.ROOT_URL, this.postData).toPromise().then(data => {
+      console.log(data);
+    })
+  }
 
 
 

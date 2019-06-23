@@ -1,29 +1,15 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <!--<p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>-->
     </div>
-    <div class="col-sm-8 text-left">
-      <h1> Login</h1>
-      <h4 class="mt-4">Home Page</h4>
-
-      <p *ngIf="user">Logged in as: {{ user?.email }} - {{ user?.displayName }} - {{ user?.uid }} - {{user?.uid}}</p>
-      <button class="btn btn-primary mr-2" *ngIf="!user" (click)="register()">Register</button>
-      <button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
-      <button class="btn btn-primary" *ngIf="!user" (click)="login()">Login</button>
+    <div class="col-sm-12 text-left">
+      <p *ngIf="!user">Hier können Sie sich für das Notrufsystem des Roten Kreuzes anmelden. Dafür müssen Sie sich erst Anmelden oder falls Sie bereits registriert sind, können Sie sich einloggen. Sobald Sie eingeloggt sind, wird das Formular aufgeschaltet.</p>
       <h1 *ngIf="user">Notrufdaten</h1>
-      <p *ngIf="user">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p *ngIf="user">Bitte füllen Sie alle Felder sorgfältig aus. Falls Sie Hilfe benötigen können Sie uns gerne unter der Nummer 044 444 44 44 erreichen.</p>
       <hr *ngIf="user">
-      <form #userEmergencyForm="ngForm" *ngIf="user" (ngSubmit)="updateUserData(userEmergencyForm)">
-        <ngb-accordion #acc="ngbAccordion">
-          <ngb-panel id="toggle-1" title="Personalien">
+      <form #userEmergencyForm="ngForm" *ngIf="user" (ngSubmit)="updateUserData(userEmergencyForm)" >
+        <ngb-accordion #acc="ngbAccordion" activeIds="general">
+          <ngb-panel id="general" title="Allgeimene Angaben">
             <ng-template ngbPanelContent>
               <div class="col-12">
                 <div class="row" *ngIf="authError">
@@ -33,33 +19,37 @@
                 </div>
                 <div class="row">
                     <input ngModel #uid="ngModel" name="uid" type="text" hidden class="form-control"
-                    [(ngModel)]="user.uid" id="uid">
+                    [(ngModel)]="user.uid" id="uid" required>
                   <div class="col s6">
-                    <label for="firstName">First name</label>
+                    <label for="firstName">Vorname</label>
                     <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control"
                       [(ngModel)]="userData.firstName" id="firstName">
                   </div>
                   <div class="col s6">
-                    <label for="lastName">Last name</label>
+                    <label for="lastName">Nachname</label>
                     <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName"
-                      [(ngModel)]="userData.lastName">
+                      [(ngModel)]="userData.lastName" required>
+                  </div>
+                </div>
+                <div>
+                  <div class="row">
+                    <div class="col s12">
+                      <label for="street">Strasse</label>
+                      <input ngModel #street="ngModel" name="street" type="text" class="form-control"
+                        [(ngModel)]="userData.street" required>
+                    </div>
                   </div>
                 </div>
                 <div>
                   <div class="row">
                     <div class="col s6">
-                      <label for="street">Strasse</label>
-                      <input ngModel #street="ngModel" name="street" type="text" class="form-control"
-                        [(ngModel)]="userData.street">
-                    </div>
-                    <div class="col s2">
                       <label>PLZ</label>
                       <input name="postcode" type="number" class="form-control" ngMin="0000" ngMax="9999"
-                        [(ngModel)]="userData.postcode">
+                        [(ngModel)]="userData.postcode" required>
                     </div>
-                    <div class="col s4">
+                    <div class="col s6">
                       <label>Ort</label>
-                      <input name="place" type="text" class="form-control" [(ngModel)]="userData.place">
+                      <input name="place" type="text" class="form-control" [(ngModel)]="userData.place" required>
                     </div>
                   </div>
                 </div>
@@ -68,24 +58,24 @@
                     <div class="col s6">
                       <label for="password">Telefon Privat</label>
                       <input ngModel #privatePhone="ngModel" name="privatePhone" type="text" class="form-control"
-                        [(ngModel)]="userData.privatePhone">
+                        [(ngModel)]="userData.privatePhone" required>
                     </div>
                     <div class="col s6">
                       <label>Telefon Mobil</label>
-                      <input ngModel #mobilePhone="ngModel" name="mobilPhone" type="text" class="form-control"
-                        [(ngModel)]="userData.mobilePhone">
+                      <input ngModel #mobilePhone="ngModel" name="mobilePhone" type="text" class="form-control"
+                        [(ngModel)]="userData.mobilePhone" required>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col s6">
-                    <label>Geburtstags-Datum</label>
-                    <input name="birthdaydate" type="date" class="form-control" [(ngModel)]="userData.birthdaydate">
+                    <label>Geburtsdatum</label>
+                    <input name="birthdaydate" type="date" class="form-control" [(ngModel)]="userData.birthdaydate" required>
                   </div>
                   <div class="col s6">
                     <label for="email">Email</label>
                     <input ngModel #email="ngModel" name="email" type="email" class="form-control"
-                      [(ngModel)]="user.email">
+                      [(ngModel)]="user.email" required>
                   </div>
                 </div>
 
@@ -95,7 +85,7 @@
         </ngb-accordion>
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit">Absenden</button>
           </div>
         </div>
       </form>
@@ -110,8 +100,7 @@
     </div>
   </div>
 </div>
-<p *ngIf="userData">ssss</p>
-{{userData?.firstName}}
+
 <!--
 <div class="container-fluid text-center">
     <div class="row">

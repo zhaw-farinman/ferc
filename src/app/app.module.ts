@@ -14,9 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { LoginComponent } from './auth/login/login.component';
-import { OrdersService } from "./shared/orders.service";
 import { FormsComponent } from './forms/forms.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { HttpClientModule} from '@angular/common/http';
 
 
 
@@ -27,7 +27,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     NavComponent,
     RegistrationComponent,
     LoginComponent,
-    FormsComponent
+    FormsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +38,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
     ],
-  providers: [OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
